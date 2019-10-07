@@ -66,9 +66,7 @@
     <body>
         <div id="app" class="flex-center position-ref full-height">
             <div class="content">
-                <div class="m-b-md">
-                    <retention></retention>
-                </div>
+                <retention></retention>
             </div>
         </div>
         <script src="/js/app.js"></script>
