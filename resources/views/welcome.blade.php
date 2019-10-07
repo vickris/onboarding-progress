@@ -64,13 +64,13 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div id="app" class="flex-center position-ref full-height">
             <div class="content">
                 <div class="m-b-md">
-                    Water is life
-
+                    <retention></retention>
                 </div>
             </div>
         </div>
+        <script src="/js/app.js"></script>
     </body>
 </html>
