@@ -8,10 +8,10 @@ class CSVReader
     {
         $cohorts = [];
         $file = fopen(storage_path('export.csv'), 'r');
-        $line = 0;
+        // Read Header
+        fgetcsv($file);
+        // Proceed to reading data
         while (([$id, $date_joined, $percentage] = fgetcsv($file, 1000, ";")) !== false) {
-            $line ++;
-            if($line == 1) continue; // Skip first line
             $start_date = \DateTime::createFromFormat('Y-m-d', $date_joined);
             $week = intval($start_date->format('W'));
             $year = intval($start_date->format('Y'));
