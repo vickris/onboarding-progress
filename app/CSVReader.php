@@ -4,10 +4,10 @@ namespace App;
 
 class CSVReader
 {
-    public static function read()
+    public static function read($csv_path)
     {
         $cohorts = [];
-        $file = fopen(storage_path('export.csv'), 'r');
+        $file = fopen($csv_path, 'r');
         // Read Header
         fgetcsv($file);
         // Proceed to reading data

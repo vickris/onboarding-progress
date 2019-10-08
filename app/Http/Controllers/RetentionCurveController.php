@@ -14,6 +14,6 @@ class RetentionCurveController extends Controller
      */
     public function index()
     {
-        return view('welcome', ['cohorts' => json_encode(CSVReader::read())]);
+        return view('welcome', ['cohorts' => json_encode(CSVReader::read(storage_path('export.csv')))]);
     }
 }
