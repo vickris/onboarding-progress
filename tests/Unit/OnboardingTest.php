@@ -36,8 +36,7 @@ class OnboardingTest extends TestCase
     public function testDataReadFromDB()
     {
         $this->createDBEntries();
-        $data = OnboardingProgress::all();
-        $this->assertEquals(OnboardingProgressService::directToAppropriateService($data),
+        $this->assertEquals(OnboardingProgressService::directToAppropriateService(OnboardingProgress::all()),
             [
                 "29-2016" => [
                     0 => 100.0,

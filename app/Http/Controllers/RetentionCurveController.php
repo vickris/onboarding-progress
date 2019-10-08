@@ -15,6 +15,6 @@ class RetentionCurveController extends Controller
      */
     public function index()
     {
-        return view('welcome', ['cohorts' => json_encode(OnboardingProgressService::directToAppropriateService(\App\OnboardingProgress::all()))]);
+        return view('welcome', ['cohorts' => json_encode(OnboardingProgressService::directToAppropriateService(storage_path('export.csv')))]);
     }
 }
