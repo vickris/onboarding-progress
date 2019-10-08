@@ -1861,9 +1861,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['cohorts'],
@@ -1871,6 +1868,50 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     return {
       seriesData: []
     };
+  },
+  methods: {
+    drawChart: function drawChart(seriesData) {
+      highcharts__WEBPACK_IMPORTED_MODULE_0___default.a.chart('retention-chart', {
+        chart: {
+          type: 'line',
+          width: 800
+        },
+        title: {
+          text: 'Weekly Retention Curve'
+        },
+        xAxis: {
+          title: {
+            text: "% reached in the onboarding flow"
+          },
+          categories: ['0', '20', '40', '50', '70', '90', '99', '100']
+        },
+        yAxis: {
+          title: {
+            text: "Total Onboarded in percentage"
+          },
+          labels: {
+            format: '{value}%'
+          },
+          min: '0',
+          max: '100'
+        },
+        legend: {
+          layout: 'horizontal',
+          floating: true,
+          backgroundColor: '#FFFFFF',
+          align: 'right',
+          verticalAlign: 'top',
+          y: 60,
+          x: -60
+        },
+        tooltip: {
+          formatter: function formatter() {
+            return '<b>' + this.series.name + '</b><br/>' + this.x + ': ' + this.y;
+          }
+        },
+        series: seriesData
+      });
+    }
   },
   mounted: function mounted() {
     for (var _i = 0, _Object$entries = Object.entries(this.cohorts); _i < _Object$entries.length; _i++) {
@@ -1885,46 +1926,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       });
     }
 
-    highcharts__WEBPACK_IMPORTED_MODULE_0___default.a.chart('retention-chart', {
-      chart: {
-        type: 'line',
-        width: 800
-      },
-      title: {
-        text: 'Weekly Retention Curve'
-      },
-      xAxis: {
-        title: {
-          text: "% reached in the onboarding flow"
-        },
-        categories: ['0', '20', '40', '50', '70', '90', '99', '100']
-      },
-      yAxis: {
-        title: {
-          text: "Total Onboarded in percentage"
-        },
-        labels: {
-          format: '{value}%'
-        },
-        min: '0',
-        max: '100'
-      },
-      legend: {
-        layout: 'horizontal',
-        floating: true,
-        backgroundColor: '#FFFFFF',
-        align: 'right',
-        verticalAlign: 'top',
-        y: 60,
-        x: -60
-      },
-      tooltip: {
-        formatter: function formatter() {
-          return '<b>' + this.series.name + '</b><br/>' + this.x + ': ' + this.y;
-        }
-      },
-      series: this.seriesData
-    });
+    this.drawChart(this.seriesData);
   }
 });
 
@@ -20047,10 +20049,6 @@ var staticRenderFns = [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-8" }, [
           _c("div", { staticClass: "card card-default" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Retention Curve")
-            ]),
-            _vm._v(" "),
             _c("div", {
               staticClass: "card-body",
               staticStyle: { height: "400px" },

@@ -3,9 +3,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card card-default">
-                    <div class="card-header">Retention Curve</div>
-
-                    <!-- Our focus right now -->
                     <div id="retention-chart"  style="height: 400px" class="card-body">
                     </div>
                 </div>
@@ -24,17 +21,9 @@
                 seriesData: []
             }
         },
-        mounted() {
-            for (let [key, values] of Object.entries(this.cohorts)) {
-                this.seriesData.push({
-                    name: key,
-                    type: 'spline',
-                    data: Object.values(values),
-
-                })
-            }
-
-            Highcharts.chart('retention-chart', {
+        methods: {
+            drawChart(seriesData) {
+                Highcharts.chart('retention-chart', {
                 chart: {
                     type: 'line',
                     width: 800,
@@ -69,8 +58,21 @@
                             this.x + ': ' + this.y;
                     }
                 },
-                series: this.seriesData
+                series: seriesData
             });
+            }
+        },
+        mounted() {
+            for (let [key, values] of Object.entries(this.cohorts)) {
+                this.seriesData.push({
+                    name: key,
+                    type: 'spline',
+                    data: Object.values(values),
+
+                })
+            }
+            this.drawChart(this.seriesData)
         }
+
     }
 </script>
