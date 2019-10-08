@@ -17,9 +17,9 @@ class CreateOnboardingProgressesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
             $table->integer('onboarding_percentage')->unsigned();
-            $table->integer('count_applications')->unsigned();
-            $table->integer('count_accepted_applications')->unsigned();
-            $table->timestamps();
+            $table->integer('count_applications')->unsigned()->default(0);
+            $table->date('created_at');
+            $table->integer('count_accepted_applications')->unsigned()->default(0);
         });
     }
 

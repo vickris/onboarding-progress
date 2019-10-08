@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\OnboardingProgressService;
 use Illuminate\Http\Request;
 use App\CSVReader;
 
@@ -14,6 +15,6 @@ class RetentionCurveController extends Controller
      */
     public function index()
     {
-        return view('welcome', ['cohorts' => json_encode(CSVReader::read(storage_path('export.csv')))]);
+        return view('welcome', ['cohorts' => json_encode(OnboardingProgressService::directToAppropriateService(\App\OnboardingProgress::all()))]);
     }
 }
