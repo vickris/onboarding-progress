@@ -36,15 +36,15 @@
 
             Highcharts.chart('retention-chart', {
                 chart: {
-                    zoomType: 'xy',
-                    width: 1000,
+                    type: 'line',
+                    width: 800,
                 },
                 title: {
                     text: 'Weekly Retention Curve'
                 },
                 xAxis: {
-                    title: {text: "Steps in the onboarding flow"},
-                    percentage: [0,20,40,50,70,90,99,100],
+                    title: {text: "% reached in the onboarding flow"},
+                    categories: ['0','20','40','50','70','90','99','100'],
                 },
                 yAxis: {
                     title: {text: "Total Onboarded in percentage"},

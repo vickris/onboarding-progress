@@ -1887,17 +1887,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
     highcharts__WEBPACK_IMPORTED_MODULE_0___default.a.chart('retention-chart', {
       chart: {
-        zoomType: 'xy',
-        width: 1000
+        type: 'line',
+        width: 800
       },
       title: {
         text: 'Weekly Retention Curve'
       },
       xAxis: {
         title: {
-          text: "Steps in the onboarding flow"
+          text: "% reached in the onboarding flow"
         },
-        percentage: [0, 20, 40, 50, 70, 90, 99, 100]
+        categories: ['0', '20', '40', '50', '70', '90', '99', '100']
       },
       yAxis: {
         title: {
