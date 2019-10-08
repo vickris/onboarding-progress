@@ -18,11 +18,22 @@
     import Highcharts from 'highcharts';
 
     export default {
+        props: ['cohorts'],
         data() {
             return {
+                seriesData: []
             }
         },
         mounted() {
+            for (let [key, values] of Object.entries(this.cohorts)) {
+                this.seriesData.push({
+                    name: key,
+                    type: 'spline',
+                    data: Object.values(values),
+
+                })
+            }
+
             Highcharts.chart('retention-chart', {
                 chart: {
                     zoomType: 'xy',
@@ -32,11 +43,8 @@
                     text: 'Weekly Retention Curve'
                 },
                 xAxis: {
-                    percentage: ['0','20','40','50','70','90','99','100'],
-                    tickInterval: 10,
-                    min: 0,
-                    max: 100
-
+                    title: {text: "Steps in the onboarding flow"},
+                    percentage: [0,20,40,50,70,90,99,100],
                 },
                 yAxis: {
                     title: {text: "Total Onboarded in percentage"},
@@ -61,16 +69,7 @@
                             this.x + ': ' + this.y;
                     }
                 },
-                series: [
-                    {
-                    type: 'spline',
-                    data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-                    },
-                    {
-                    type: 'spline',
-                    data: [12, 71.5, 40.4, 23.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-                    }
-                ]
+                series: this.seriesData
             });
         }
     }

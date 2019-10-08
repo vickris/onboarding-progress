@@ -66,7 +66,7 @@
     <body>
         <div id="app" class="flex-center position-ref full-height">
             <div class="content">
-                <retention></retention>
+                <retention :cohorts="{{ $cohorts }}"></retention>
             </div>
         </div>
         <script src="/js/app.js"></script>

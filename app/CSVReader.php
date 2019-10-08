@@ -7,7 +7,7 @@ class CSVReader
     public static function read()
     {
         $cohorts = [];
-        $file = fopen('storage/export.csv', 'r');
+        $file = fopen(storage_path('export.csv'), 'r');
         $line = 0;
         while (([$id, $date_joined, $percentage] = fgetcsv($file, 1000, ";")) !== false) {
             $line ++;
@@ -34,7 +34,8 @@ class CSVReader
         }
 
         fclose($file);
-        dump($cohorts_with_percentages);
+
+        return $cohorts_with_percentages;
     }
 
 

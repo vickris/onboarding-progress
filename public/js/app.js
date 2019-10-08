@@ -1840,6 +1840,14 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! highcharts */ "./node_modules/highcharts/highcharts.js");
 /* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(highcharts__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 //
 //
 //
@@ -1858,10 +1866,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['cohorts'],
   data: function data() {
-    return {};
+    return {
+      seriesData: []
+    };
   },
   mounted: function mounted() {
+    for (var _i = 0, _Object$entries = Object.entries(this.cohorts); _i < _Object$entries.length; _i++) {
+      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+          key = _Object$entries$_i[0],
+          values = _Object$entries$_i[1];
+
+      this.seriesData.push({
+        name: key,
+        type: 'spline',
+        data: Object.values(values)
+      });
+    }
+
     highcharts__WEBPACK_IMPORTED_MODULE_0___default.a.chart('retention-chart', {
       chart: {
         zoomType: 'xy',
@@ -1871,10 +1894,10 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Weekly Retention Curve'
       },
       xAxis: {
-        percentage: ['0', '20', '40', '50', '70', '90', '99', '100'],
-        tickInterval: 10,
-        min: 0,
-        max: 100
+        title: {
+          text: "Steps in the onboarding flow"
+        },
+        percentage: [0, 20, 40, 50, 70, 90, 99, 100]
       },
       yAxis: {
         title: {
@@ -1900,13 +1923,7 @@ __webpack_require__.r(__webpack_exports__);
           return '<b>' + this.series.name + '</b><br/>' + this.x + ': ' + this.y;
         }
       },
-      series: [{
-        type: 'spline',
-        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-      }, {
-        type: 'spline',
-        data: [12, 71.5, 40.4, 23.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-      }]
+      series: this.seriesData
     });
   }
 });
