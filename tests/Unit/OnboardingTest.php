@@ -67,6 +67,48 @@ class OnboardingTest extends TestCase
         $this->assertFalse(OnboardingProgressService::directToAppropriateService($file));
     }
 
+    public function testgetCohortsMethod()
+    {
+        $this->assertEquals(OnboardingProgressService::getCohorts("2016-07-19", "40", []),
+        [
+            "29-2016" => [
+                0 => 1,
+                20 => 1,
+                40 => 1,
+            ]
+        ]);
+    }
+
+    public function testformatCohortProgressionAsPercentageMethod()
+    {
+        $cohorts = [
+          "29-2016" =>  [
+            0 => 5,
+            20 => 5,
+            40 => 5,
+            50 => 2,
+            70 => 2,
+            90 => 2,
+            99 => 2,
+            100 => 2,
+          ]
+        ];
+
+        $this->assertEquals(OnboardingProgressService::formatCohortProgressionAsPercentage($cohorts),
+        [
+            "29-2016" => [
+                0 => 100.0,
+                20 => 100.0,
+                40 => 100.0,
+                50 => 40.0,
+                70 => 40.0,
+                90 => 40.0,
+                99 => 40.0,
+                100 => 40.0,
+            ]
+        ]);
+    }
+
     public function createDBEntries()
     {
         OnboardingProgress::create([
