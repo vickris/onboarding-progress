@@ -16,6 +16,8 @@ class CSVReader
             $week = intval($start_date->format('W'));
             $year = intval($start_date->format('Y'));
 
+            if(empty($percentage)) continue;
+
             if(isset($cohorts["$week-$year"][$percentage])) {
                 $cohorts["$week-$year"][$percentage] ++;
             } else{
@@ -23,7 +25,16 @@ class CSVReader
             }
 
         }
+        $cohorts_with_percentages = [];
+        foreach ($cohorts as $cohort => $values) {
+            $cohort_total = array_sum(array_values($values));
+            foreach ($values as $key => $value) {
+                $cohorts_with_percentages[$cohort][$key] = round(($value/$cohort_total) * 100);
+            }
+        }
+
         fclose($file);
+        dump($cohorts_with_percentages);
     }
 
 
