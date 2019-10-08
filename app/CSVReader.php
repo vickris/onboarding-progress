@@ -7,7 +7,13 @@ class CSVReader
     public static function read($csv_path)
     {
         $cohorts = [];
-        $file = fopen($csv_path, 'r');
+
+        try {
+            $file = fopen($csv_path, 'r');
+        } catch (\Exception $e) {
+            return false;
+        }
+
         // Read Header
         fgetcsv($file);
         // Proceed to reading data

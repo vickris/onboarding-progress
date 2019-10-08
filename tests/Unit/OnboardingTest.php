@@ -62,6 +62,12 @@ class OnboardingTest extends TestCase
         ]);
     }
 
+    public function testCantReadInvalidCSVPath()
+    {
+        $file = storage_path('water.csv');
+        $this->assertFalse(OnboardingProgressService::directToAppropriateService($file));
+    }
+
     public function createDBEntries()
     {
         OnboardingProgress::create([
